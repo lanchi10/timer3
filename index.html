@@ -9,112 +9,153 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            min-height: 100vh;
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: white;
         }
+
         .timer-display {
-            font-size: 6rem;
+            font-size: 5rem;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            letter-spacing: 0.2rem;
+            margin: 2rem 0;
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .btn-quick {
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
-        }
-        .btn-quick:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-        .btn-quick.selected {
-            border-color: #fbbf24;
-            background: linear-gradient(45deg, #f59e0b, #fbbf24);
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
-        }
+
         .status-display {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 15px;
-            padding: 1rem;
-            margin: 1rem 0;
             font-size: 1.5rem;
-            color: white;
-            text-align: center;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .input-group {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 1.5rem;
+            font-weight: bold;
+            padding: 1rem;
+            border-radius: 0.75rem;
             margin: 1rem 0;
-        }
-        .time-input {
-            width: 80px;
-            height: 60px;
-            font-size: 2rem;
             text-align: center;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            background: white;
+            transition: all 0.3s ease;
         }
-        .interval-input {
-            width: 60px;
-            height: 40px;
-            font-size: 1.2rem;
-            text-align: center;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            background: white;
-        }
-        .glow-green { 
-            background: #10b981; 
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-        }
-        .glow-blue { 
-            background: #3b82f6; 
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-        .glow-red { 
-            background: #ef4444; 
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
-        }
-        .glow-yellow { 
-            background: #f59e0b; 
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
+
+        .glow-green { background: rgba(34, 197, 94, 0.2); border: 2px solid #22c55e; }
+        .glow-red { background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444; }
+        .glow-blue { background: rgba(59, 130, 246, 0.2); border: 2px solid #3b82f6; }
+        .glow-yellow { background: rgba(251, 191, 36, 0.2); border: 2px solid #fbbf24; }
+
         .pulse-animation {
             animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .input-group {
+            background: rgba(55, 65, 81, 0.8);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(75, 85, 99, 0.5);
+        }
+
+        .time-input {
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 2px solid #4f46e5;
+            background: white;
+            color: black;
+            text-align: center;
+            width: 100%;
+            max-width: 120px;
+        }
+
+        .time-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-quick {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .btn-quick:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-quick.selected {
+            border: 3px solid #fbbf24;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+            transform: scale(1.05);
+        }
+
+        .control-btn {
+            font-size: 1.25rem;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .timer-display { font-size: 3rem; }
+            .time-input { font-size: 1.5rem; max-width: 80px; }
         }
     </style>
 </head>
 <body class="text-white">
     <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- כותרת -->
         <div class="text-center mb-8">
-            <h1 class="text-5xl font-bold mb-2">טיימר בישול קולי</h1>
-            <p class="text-xl opacity-90">עם התרעות</p>
-            <div class="text-sm mt-4 bg-black bg-opacity-30 p-3 rounded-lg">
-                🎤 קריינות: <span class="text-red-300">שעות = קול גברי נמוך</span> | 
-                <span class="text-blue-300">דקות = קול נשי</span> | 
-                <span class="text-green-300">שניות = קול מהיר</span>
+            <h1 class="text-5xl font-bold mb-2">
+                <i class="fas fa-clock mr-4"></i>טיימר בישול קולי
+            </h1>
+            <p class="text-xl text-gray-300">עם התרעות בעברית</p>
+        </div>
+
+        <!-- תצוגת הטיימר הראשית -->
+        <div class="text-center">
+            <div id="timerDisplay" class="timer-display">00:00:00</div>
+            <div id="statusDisplay" class="status-display">
+                <i class="fas fa-clock mr-2"></i>הגדר טיימר והתחל
             </div>
         </div>
 
-        <!-- תצוגת טיימר ראשית -->
-        <div class="text-center mb-6">
-            <div id="timerDisplay" class="timer-display text-white">00:00:00</div>
-            <div id="statusDisplay" class="status-display">
-                <i class="fas fa-clock mr-2"></i>
-                הגדר טיימר והתחל
+        <!-- כפתור התחלה מרכזי -->
+        <div class="text-center mb-8">
+            <button id="startBtn" class="control-btn bg-green-500 hover:bg-green-600 text-white px-12 py-4 text-2xl">
+                <i class="fas fa-play mr-3"></i>התחל טיימר
+            </button>
+        </div>
+
+        <!-- הגדרת זמן ידנית -->
+        <div class="input-group">
+            <h3 class="text-2xl font-bold mb-4 text-center">
+                <i class="fas fa-edit mr-2"></i>הגדרת זמן ידנית
+            </h3>
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div>
+                    <label class="block text-lg font-bold mb-2">שעות</label>
+                    <input type="number" id="hours" class="time-input" min="0" max="23" value="0">
+                </div>
+                <div>
+                    <label class="block text-lg font-bold mb-2">דקות</label>
+                    <input type="number" id="minutes" class="time-input" min="0" max="59" value="0">
+                </div>
+                <div>
+                    <label class="block text-lg font-bold mb-2">שניות</label>
+                    <input type="number" id="seconds" class="time-input" min="0" max="59" value="0">
+                </div>
             </div>
         </div>
 
@@ -123,294 +164,219 @@
             <h3 class="text-2xl font-bold mb-4 text-center">
                 <i class="fas fa-tachometer-alt mr-2"></i>בחירה מהירה
             </h3>
-            <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
-                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(1, 'minute')">1 דקה</button>
-                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(3, 'minute')">3 דקות</button>
-                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(5, 'minute')">5 דקות</button>
-                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(10, 'minute')">10 דקות</button>
-                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(15, 'minute')">15 דקות</button>
-                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(30, 'minute')">30 דקות</button>
-                <button class="btn-quick bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(1, 'hour')">1 שעה</button>
-                <button class="btn-quick bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(2, 'hour')">2 שעות</button>
-                <button class="btn-quick bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(30, 'second')">30 שניות</button>
-                <button class="btn-quick bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(45, 'second')">45 שניות</button>
-                <button class="btn-quick bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(60, 'second')">60 שניות</button>
-                <button class="btn-quick bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg" onclick="quickSelect(90, 'second')">90 שניות</button>
+            <div id="quickSelectContainer" class="grid grid-cols-3 md:grid-cols-6 gap-3">
+                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" data-value="1" data-unit="minute">1 דקה</button>
+                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" data-value="3" data-unit="minute">3 דקות</button>
+                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" data-value="5" data-unit="minute">5 דקות</button>
+                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" data-value="10" data-unit="minute">10 דקות</button>
+                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" data-value="15" data-unit="minute">15 דקות</button>
+                <button class="btn-quick bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg" data-value="30" data-unit="minute">30 דקות</button>
+                <button class="btn-quick bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-4 rounded-lg" data-value="1" data-unit="hour">1 שעה</button>
+                <button class="btn-quick bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-4 rounded-lg" data-value="2" data-unit="hour">2 שעות</button>
+                <button class="btn-quick bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg" data-value="30" data-unit="second">30 שניות</button>
+                <button class="btn-quick bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg" data-value="45" data-unit="second">45 שניות</button>
+                <button class="btn-quick bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg" data-value="60" data-unit="second">60 שניות</button>
+                <button class="btn-quick bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg" data-value="90" data-unit="second">90 שניות</button>
             </div>
         </div>
 
-        <!-- הגדרה ידנית -->
-        <div class="input-group">
-            <h3 class="text-2xl font-bold mb-4 text-center">
-                <i class="fas fa-cog mr-2"></i>הגדרה ידנית
-            </h3>
-            <div class="flex justify-center items-center space-x-4 mb-4">
-                <div class="text-center">
-                    <label class="block text-lg font-semibold mb-2">שעות</label>
-                    <input type="number" id="hours" class="time-input" min="0" max="23" value="0">
-                </div>
-                <span class="text-4xl font-bold">:</span>
-                <div class="text-center">
-                    <label class="block text-lg font-semibold mb-2">דקות</label>
-                    <input type="number" id="minutes" class="time-input" min="0" max="59" value="0">
-                </div>
-                <span class="text-4xl font-bold">:</span>
-                <div class="text-center">
-                    <label class="block text-lg font-semibold mb-2">שניות</label>
-                    <input type="number" id="seconds" class="time-input" min="0" max="59" value="0">
-                </div>
-            </div>
-        </div>
-
-        <!-- הגדרת מרווח התרעות -->
+        <!-- הגדרת מרווחי התרעה -->
         <div class="input-group">
             <h3 class="text-2xl font-bold mb-4 text-center">
                 <i class="fas fa-bell mr-2"></i>מרווח התרעות
             </h3>
-            <p class="text-center text-sm mb-4 opacity-80">הטיימר יכריז כמה זמן נשאר לסיום</p>
-            <div class="flex justify-center items-center space-x-6">
-                <div class="text-center">
-                    <label class="block text-lg font-semibold mb-2">שעות</label>
-                    <input type="number" id="alertHours" class="interval-input" min="0" max="23" value="0">
+            <div class="grid grid-cols-3 gap-4 text-center mb-4">
+                <div>
+                    <label class="block text-lg font-bold mb-2">שעות</label>
+                    <input type="number" id="alertHours" class="time-input" min="0" max="23" value="0">
                 </div>
-                <span class="text-2xl font-bold">:</span>
-                <div class="text-center">
-                    <label class="block text-lg font-semibold mb-2">דקות</label>
-                    <input type="number" id="alertMinutes" class="interval-input" min="0" max="59" value="5">
+                <div>
+                    <label class="block text-lg font-bold mb-2">דקות</label>
+                    <input type="number" id="alertMinutes" class="time-input" min="0" max="59" value="5">
                 </div>
-                <span class="text-2xl font-bold">:</span>
-                <div class="text-center">
-                    <label class="block text-lg font-semibold mb-2">שניות</label>
-                    <input type="number" id="alertSeconds" class="interval-input" min="0" max="59" value="0">
+                <div>
+                    <label class="block text-lg font-bold mb-2">שניות</label>
+                    <input type="number" id="alertSeconds" class="time-input" min="0" max="59" value="0">
                 </div>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
-                <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded" onclick="setAlertInterval(0,1,0)">כל דקה</button>
-                <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded" onclick="setAlertInterval(0,2,0)">כל 2 דקות</button>
-                <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded" onclick="setAlertInterval(0,5,0)">כל 5 דקות</button>
-                <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded" onclick="setAlertInterval(0,10,0)">כל 10 דקות</button>
-                <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded" onclick="setAlertInterval(0,0,30)">כל 30 שניות</button>
-                <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded" onclick="setAlertInterval(0,0,15)">כל 15 שניות</button>
-                <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded" onclick="setAlertInterval(0,0,10)">כל 10 שניות</button>
-                <button class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-3 rounded" onclick="setAlertInterval(0,15,0)">כל 15 דקות</button>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <button class="btn-quick bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg" data-alert-value="30" data-alert-unit="second">30 שניות</button>
+                <button class="btn-quick bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg" data-alert-value="1" data-alert-unit="minute">1 דקה</button>
+                <button class="btn-quick bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg" data-alert-value="2" data-alert-unit="minute">2 דקות</button>
+                <button class="btn-quick bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg" data-alert-value="5" data-alert-unit="minute">5 דקות</button>
             </div>
         </div>
 
         <!-- כפתורי פקד -->
         <div class="text-center space-x-4">
-            <button id="startBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-xl" onclick="startTimer()">
-                <i class="fas fa-play mr-2"></i>התחל טיימר
-            </button>
-            <button id="stopBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-lg text-xl" onclick="stopTimer()">
+            <button id="stopBtn" class="control-btn bg-red-500 hover:bg-red-600 text-white" style="display: none;">
                 <i class="fas fa-stop mr-2"></i>עצור
             </button>
-            <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-lg text-xl" onclick="testVoice()">
+            <button id="resetBtn" class="control-btn bg-yellow-500 hover:bg-yellow-600 text-white">
+                <i class="fas fa-undo mr-2"></i>איפוס
+            </button>
+            <button id="testVoiceBtn" class="control-btn bg-purple-500 hover:bg-purple-600 text-white">
                 <i class="fas fa-volume-up mr-2"></i>בדוק קול
             </button>
+        </div>
+
+        <!-- מקרא -->
+        <div class="text-center text-sm text-gray-400 mt-8">
+            🔴 שעות: קול נמוך | 🔵 דקות: קול רגיל | 🟢 שניות: קול גבוה
         </div>
     </div>
 
     <script>
         let timerInterval;
         let totalSeconds = 0;
-        let alertIntervalSeconds = 300; // ברירת מחדל: כל 5 דקות
+        let alertIntervalSeconds = 300;
         let isRunning = false;
         let selectedQuickButton = null;
 
-        // מספרים בעברית לתצוגה
-        const hebrewNumbers = {
-            0: 'אפס', 1: 'אחת', 2: 'שתיים', 3: 'שלוש', 4: 'ארבע', 5: 'חמש',
-            6: 'שש', 7: 'שבע', 8: 'שמונה', 9: 'תשע', 10: 'עשר',
-            11: 'אחת עשרה', 12: 'שתיים עשרה', 13: 'שלוש עשרה', 14: 'ארבע עשרה', 15: 'חמש עשרה',
-            16: 'שש עשרה', 17: 'שבע עשרה', 18: 'שמונה עשרה', 19: 'תשע עשרה', 20: 'עשרים',
-            30: 'שלושים', 40: 'ארבעים', 50: 'חמישים', 60: 'שישים'
-        };
+        // DOM Elements
+        const timerDisplay = document.getElementById('timerDisplay');
+        const statusDisplay = document.getElementById('statusDisplay');
+        const hoursInput = document.getElementById('hours');
+        const minutesInput = document.getElementById('minutes');
+        const secondsInput = document.getElementById('seconds');
+        const alertHoursInput = document.getElementById('alertHours');
+        const alertMinutesInput = document.getElementById('alertMinutes');
+        const alertSecondsInput = document.getElementById('alertSeconds');
 
-        function quickSelect(value, unit) {
-            // הסר הדגשה מכל הכפתורים
-            document.querySelectorAll('.btn-quick').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-
-            // הדגש את הכפתור שנלחץ
-            event.target.classList.add('selected');
-            selectedQuickButton = event.target;
-
-            // הגדר את הזמן
-            let hours = 0, minutes = 0, seconds = 0;
-            
-            if (unit === 'hour') {
-                hours = value;
-            } else if (unit === 'minute') {
-                minutes = value;
-            } else if (unit === 'second') {
-                seconds = value;
-            }
-
-            document.getElementById('hours').value = hours;
-            document.getElementById('minutes').value = minutes;
-            document.getElementById('seconds').value = seconds;
-
-            updateTimerDisplay();
-            updateStatusDisplay();
+        // Helper Functions
+        function secondsToHMS(secs) {
+            const h = Math.floor(secs / 3600);
+            const m = Math.floor((secs % 3600) / 60);
+            const s = secs % 60;
+            return { h, m, s };
         }
 
-        function setAlertInterval(h, m, s) {
-            document.getElementById('alertHours').value = h;
-            document.getElementById('alertMinutes').value = m;
-            document.getElementById('alertSeconds').value = s;
-            alertIntervalSeconds = h * 3600 + m * 60 + s;
+        function updateDisplayFromInputs() {
+            const h = parseInt(hoursInput.value) || 0;
+            const m = parseInt(minutesInput.value) || 0;
+            const s = parseInt(secondsInput.value) || 0;
+            
+            totalSeconds = h * 3600 + m * 60 + s;
+            updateTimerDisplay(totalSeconds);
         }
 
-        function updateTimerDisplay() {
-            const hours = parseInt(document.getElementById('hours').value) || 0;
-            const minutes = parseInt(document.getElementById('minutes').value) || 0;
-            const seconds = parseInt(document.getElementById('seconds').value) || 0;
-            
-            totalSeconds = hours * 3600 + minutes * 60 + seconds;
-            
-            const display = document.getElementById('timerDisplay');
-            const h = Math.floor(totalSeconds / 3600);
-            const m = Math.floor((totalSeconds % 3600) / 60);
-            const s = totalSeconds % 60;
-            
-            display.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        function updateTimerDisplay(secs) {
+            const { h, m, s } = secondsToHMS(secs);
+            timerDisplay.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }
-
+        
         function updateStatusDisplay() {
-            const statusDisplay = document.getElementById('statusDisplay');
-            if (!isRunning) {
-                const hours = parseInt(document.getElementById('hours').value) || 0;
-                const minutes = parseInt(document.getElementById('minutes').value) || 0;
-                const seconds = parseInt(document.getElementById('seconds').value) || 0;
-                
-                if (hours === 0 && minutes === 0 && seconds === 0) {
-                    statusDisplay.innerHTML = '<i class="fas fa-clock mr-2"></i>הגדר טיימר והתחל';
+            if (isRunning) return;
+
+            const h = parseInt(hoursInput.value) || 0;
+            const m = parseInt(minutesInput.value) || 0;
+            const s = parseInt(secondsInput.value) || 0;
+
+            if (h === 0 && m === 0 && s === 0) {
+                statusDisplay.innerHTML = '<i class="fas fa-clock mr-2"></i>הגדר טיימר והתחל';
+                statusDisplay.className = 'status-display';
+            } else {
+                let timeText = [];
+                if (h > 0) timeText.push(`${h} ${h === 1 ? 'שעה' : 'שעות'}`);
+                if (m > 0) timeText.push(`${m} ${m === 1 ? 'דקה' : 'דקות'}`);
+                if (s > 0) timeText.push(`${s} ${s === 1 ? 'שנייה' : 'שניות'}`);
+                statusDisplay.innerHTML = `<i class="fas fa-hourglass-half mr-2"></i>הטיימר מוכן למשך ${timeText.join(' ו-')}`;
+                statusDisplay.className = 'status-display glow-blue';
+            }
+        }
+        
+        // Voice Synthesis with Hebrew
+        function formatTimeForSpeechHebrew(totalSecs, context = 'remaining') {
+            if (totalSecs <= 0) return context === 'remaining' ? "הזמן אזל" : "אפס זמן";
+
+            const { h, m, s } = secondsToHMS(totalSecs);
+            let parts = [];
+
+            if (h > 0) parts.push(`${h} ${h === 1 ? 'שעה' : h === 2 ? 'שעתיים' : 'שעות'}`);
+            if (m > 0) parts.push(`${m} ${m === 1 ? 'דקה' : 'דקות'}`);
+            if (s > 0) {
+                if (h > 0 || m > 0) {
+                    parts.push(`ו-${s} ${s === 1 ? 'שנייה' : 'שניות'}`);
                 } else {
-                    let timeText = '';
-                    if (hours > 0) timeText += `${hours} שעות `;
-                    if (minutes > 0) timeText += `${minutes} דקות `;
-                    if (seconds > 0) timeText += `${seconds} שניות`;
-                    
-                    statusDisplay.innerHTML = `<i class="fas fa-hourglass-half mr-2"></i>הטיימר מוכן למשך ${timeText.trim()}`;
+                    parts.push(`${s} ${s === 1 ? 'שנייה' : 'שניות'}`);
                 }
             }
+
+            const timeString = parts.join(' ');
+            if (context === 'remaining') return `נשארו ${timeString}`;
+            return `טיימר הופעל ל-${timeString}`;
         }
 
-        function formatTimeForSpeech(totalSecs) {
-            const hours = Math.floor(totalSecs / 3600);
-            const minutes = Math.floor((totalSecs % 3600) / 60);
-            const seconds = totalSecs % 60;
-            
-            let text = '';
-            if (hours > 0) {
-                text += hours === 1 ? 'one hour' : `${hours} hours`;
-                if (minutes > 0 || seconds > 0) text += ' and ';
-            }
-            if (minutes > 0) {
-                text += minutes === 1 ? 'one minute' : `${minutes} minutes`;
-                if (seconds > 0 && hours === 0) text += ' and ';
-            }
-            if (seconds > 0 && hours === 0) {
-                text += seconds === 1 ? 'one second' : `${seconds} seconds`;
-            }
-            
-            return text;
-        }
-
-        function speak(text, pitch = 1, rate = 1, volume = 1) {
+        function speak(text, pitch = 1, rate = 1) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'he-IL'; // Hebrew voice
                 utterance.pitch = pitch;
                 utterance.rate = rate;
-                utterance.volume = volume;
-                utterance.lang = 'en-US';
-                
+                utterance.volume = 1;
                 speechSynthesis.speak(utterance);
-                
-                // רטט בטלפון
-                if ('vibrate' in navigator) {
-                    if (pitch > 1.1) {
-                        navigator.vibrate(1000); // שעות - רטט ארוך
-                    } else if (pitch < 0.9) {
-                        navigator.vibrate(200); // שניות - רטט קצר
-                    } else {
-                        navigator.vibrate(500); // דקות - רטט בינוני
-                    }
-                }
             }
         }
 
+        // Timer Logic
         function startTimer() {
-            updateTimerDisplay();
-            
+            updateDisplayFromInputs();
             if (totalSeconds <= 0) {
                 alert('אנא הגדר זמן תקין');
                 return;
             }
-
-            alertIntervalSeconds = parseInt(document.getElementById('alertHours').value) * 3600 + 
-                                 parseInt(document.getElementById('alertMinutes').value) * 60 + 
-                                 parseInt(document.getElementById('alertSeconds').value);
+            if (isRunning) return;
 
             isRunning = true;
-            const statusDisplay = document.getElementById('statusDisplay');
-            statusDisplay.innerHTML = '<i class="fas fa-play-circle mr-2 pulse-animation"></i>הטיימר פועל...';
-            statusDisplay.classList.add('glow-green');
+            alertIntervalSeconds = (parseInt(alertHoursInput.value) * 3600) +
+                                 (parseInt(alertMinutesInput.value) * 60) +
+                                 (parseInt(alertSecondsInput.value));
 
-            // הכרזת התחלה
-            const timeText = formatTimeForSpeech(totalSeconds);
-            speak(`Timer started for ${timeText}`, 1, 1, 1);
+            statusDisplay.innerHTML = '<i class="fas fa-play-circle mr-2 pulse-animation"></i>הטיימר פועל...';
+            statusDisplay.className = 'status-display glow-green';
+            
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('stopBtn').style.display = 'inline-block';
+            
+            speak(formatTimeForSpeechHebrew(totalSeconds, 'start'));
 
             timerInterval = setInterval(() => {
                 totalSeconds--;
-                
-                const display = document.getElementById('timerDisplay');
-                const h = Math.floor(totalSeconds / 3600);
-                const m = Math.floor((totalSeconds % 3600) / 60);
-                const s = totalSeconds % 60;
-                
-                display.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                updateTimerDisplay(totalSeconds);
 
-                // שינוי צבע רקע לפי זמן נותר
-                if (totalSeconds <= 60) {
-                    statusDisplay.classList.remove('glow-green', 'glow-blue');
-                    statusDisplay.classList.add('glow-red');
-                    statusDisplay.innerHTML = '<i class="fas fa-exclamation-triangle mr-2 pulse-animation"></i>פחות מדקה נותרה!';
-                } else if (totalSeconds <= 300) {
-                    statusDisplay.classList.remove('glow-green');
-                    statusDisplay.classList.add('glow-blue');
-                    statusDisplay.innerHTML = '<i class="fas fa-clock mr-2"></i>פחות מ-5 דקות נותרו';
+                // Update status and color
+                if (totalSeconds <= 10) {
+                    statusDisplay.className = 'status-display glow-red';
+                    statusDisplay.innerHTML = '<i class="fas fa-exclamation-triangle mr-2 pulse-animation"></i>עשר שניות לסיום!';
+                } else if (totalSeconds <= 60) {
+                    statusDisplay.className = 'status-display glow-blue';
+                    statusDisplay.innerHTML = '<i class="fas fa-clock mr-2"></i>פחות מדקה נותרה';
                 }
 
-                // התרעות במרווחים
+                // Announce remaining time at intervals
                 if (alertIntervalSeconds > 0 && totalSeconds > 0 && totalSeconds % alertIntervalSeconds === 0) {
                     announceTimeRemaining();
                 }
 
-                // ספירה לאחור ב-5 שניות האחרונות
+                // Countdown last 5 seconds
                 if (totalSeconds <= 5 && totalSeconds > 0) {
-                    speak(totalSeconds.toString(), 0.8, 1.2, 1);
+                    speak(totalSeconds.toString(), 1.2, 1.2);
                 }
 
-                // סיום הטיימר
+                // Timer finished
                 if (totalSeconds <= 0) {
                     clearInterval(timerInterval);
                     isRunning = false;
+                    statusDisplay.className = 'status-display glow-yellow';
+                    statusDisplay.innerHTML = '<i class="fas fa-check-circle mr-2"></i>הטיימר הסתיים!';
+                    timerDisplay.textContent = 'סיום!';
+                    speak('הטיימר הסתיים בהצלחה');
                     
-                    statusDisplay.innerHTML = '<i class="fas fa-check-circle mr-2"></i>הטיימר הסתיים בהצלחה!';
-                    statusDisplay.classList.remove('glow-green', 'glow-blue', 'glow-red');
-                    statusDisplay.classList.add('glow-yellow');
+                    document.getElementById('startBtn').style.display = 'inline-block';
+                    document.getElementById('stopBtn').style.display = 'none';
                     
-                    // הכרזת סיום
-                    speak('Timer completed successfully!', 1, 0.9, 1);
+                    if ('vibrate' in navigator) navigator.vibrate([500, 200, 500]);
                     
-                    // רטט ארוך לסיום
-                    if ('vibrate' in navigator) {
-                        navigator.vibrate([500, 200, 500, 200, 500]);
-                    }
-                    
-                    // הסר הדגשה מכפתור בחירה מהירה
                     if (selectedQuickButton) {
                         selectedQuickButton.classList.remove('selected');
                         selectedQuickButton = null;
@@ -419,52 +385,115 @@
             }, 1000);
         }
 
-        function announceTimeRemaining() {
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-
-            if (hours > 0) {
-                const text = hours === 1 ? 'Hours remaining: one' : `Hours remaining: ${hours}`;
-                speak(text, 1.2, 0.8, 1); // קול גברי נמוך לשעות
-            } else if (minutes > 0) {
-                const text = minutes === 1 ? 'Minutes remaining: one' : `Minutes remaining: ${minutes}`;
-                speak(text, 1, 1, 1); // קול נשי רגיל לדקות
-            } else if (seconds > 0) {
-                const text = seconds === 1 ? 'Seconds remaining: one' : `Seconds remaining: ${seconds}`;
-                speak(text, 0.8, 1.3, 1); // קול מהיר לשניות
-            }
-        }
-
         function stopTimer() {
             clearInterval(timerInterval);
+            if (!isRunning) return;
             isRunning = false;
-            
-            const statusDisplay = document.getElementById('statusDisplay');
+            statusDisplay.className = 'status-display';
             statusDisplay.innerHTML = '<i class="fas fa-stop-circle mr-2"></i>הטיימר נעצר';
-            statusDisplay.classList.remove('glow-green', 'glow-blue', 'glow-red', 'glow-yellow');
-            
-            // הסר הדגשה מכפתור בחירה מהירה
+            document.getElementById('startBtn').style.display = 'inline-block';
+            document.getElementById('stopBtn').style.display = 'none';
+            if (selectedQuickButton) selectedQuickButton.classList.remove('selected');
+            speak('הטיימר נעצר');
+        }
+
+        function resetTimer() {
+            stopTimer();
+            hoursInput.value = 0;
+            minutesInput.value = 0;
+            secondsInput.value = 0;
+            totalSeconds = 0;
+            updateTimerDisplay(0);
+            updateStatusDisplay();
             if (selectedQuickButton) {
                 selectedQuickButton.classList.remove('selected');
                 selectedQuickButton = null;
             }
+            speak('הטיימר אופס');
+        }
+
+        function announceTimeRemaining() {
+            const { h, m, s } = secondsToHMS(totalSeconds);
+            const text = formatTimeForSpeechHebrew(totalSeconds);
             
-            speak('Timer stopped', 1, 1, 1);
+            // Correct pitch/rate logic
+            if (h > 0) {
+                speak(text, 0.8, 0.9); // Low pitch, slightly slow for hours
+            } else if (m > 0) {
+                speak(text, 1, 1); // Normal pitch/rate for minutes
+            } else {
+                speak(text, 1.2, 1.2); // High pitch, fast for seconds
+            }
         }
+        
+        // Event Handlers
+        document.getElementById('quickSelectContainer').addEventListener('click', (event) => {
+            if (event.target.classList.contains('btn-quick')) {
+                // Handle timer quick select
+                if (event.target.dataset.value && event.target.dataset.unit) {
+                    const value = parseInt(event.target.dataset.value);
+                    const unit = event.target.dataset.unit;
+                    
+                    document.querySelectorAll('.btn-quick').forEach(btn => btn.classList.remove('selected'));
+                    event.target.classList.add('selected');
+                    selectedQuickButton = event.target;
 
-        function testVoice() {
-            speak('Hours remaining: two', 1.2, 0.8, 1);
-            setTimeout(() => speak('Minutes remaining: thirty', 1, 1, 1), 1500);
-            setTimeout(() => speak('Seconds remaining: fifteen', 0.8, 1.3, 1), 3000);
-        }
+                    let totalSelectedSeconds = 0;
+                    if (unit === 'hour') totalSelectedSeconds = value * 3600;
+                    else if (unit === 'minute') totalSelectedSeconds = value * 60;
+                    else totalSelectedSeconds = value;
+                    
+                    const { h, m, s } = secondsToHMS(totalSelectedSeconds);
+                    hoursInput.value = h;
+                    minutesInput.value = m;
+                    secondsInput.value = s;
 
-        // עדכון תצוגה כשמשנים ערכים
-        document.getElementById('hours').addEventListener('input', updateStatusDisplay);
-        document.getElementById('minutes').addEventListener('input', updateStatusDisplay);
-        document.getElementById('seconds').addEventListener('input', updateStatusDisplay);
+                    updateDisplayFromInputs();
+                    updateStatusDisplay();
+                }
+                
+                // Handle alert interval quick select
+                if (event.target.dataset.alertValue && event.target.dataset.alertUnit) {
+                    const value = parseInt(event.target.dataset.alertValue);
+                    const unit = event.target.dataset.alertUnit;
+                    
+                    let totalAlertSeconds = 0;
+                    if (unit === 'hour') totalAlertSeconds = value * 3600;
+                    else if (unit === 'minute') totalAlertSeconds = value * 60;
+                    else totalAlertSeconds = value;
+                    
+                    const { h, m, s } = secondsToHMS(totalAlertSeconds);
+                    alertHoursInput.value = h;
+                    alertMinutesInput.value = m;
+                    alertSecondsInput.value = s;
+                }
+            }
+        });
 
-        // אתחול התצוגה
+        // Event listeners for buttons
+        document.getElementById('startBtn').addEventListener('click', startTimer);
+        document.getElementById('stopBtn').addEventListener('click', stopTimer);
+        document.getElementById('resetBtn').addEventListener('click', resetTimer);
+        document.getElementById('testVoiceBtn').addEventListener('click', () => {
+            speak('בדיקת קול לשעות', 0.8, 0.9);
+            setTimeout(() => speak('בדיקת קול לדקות', 1, 1), 1500);
+            setTimeout(() => speak('בדיקת קול לשניות', 1.2, 1.2), 3000);
+        });
+
+        // Listen for changes in time inputs
+        [hoursInput, minutesInput, secondsInput].forEach(input => {
+            input.addEventListener('input', () => {
+                if (selectedQuickButton) {
+                    selectedQuickButton.classList.remove('selected');
+                    selectedQuickButton = null;
+                }
+                updateDisplayFromInputs();
+                updateStatusDisplay();
+            });
+        });
+        
+        // Initial Load
+        updateDisplayFromInputs();
         updateStatusDisplay();
     </script>
 </body>
